@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import { IveyProfilePage } from '../pages/IveyProfilePage';
 
-test('Pinas Peaks Profile in Web', async ({ page }) => {
+test('PinasPeaks: Ivey Profile Page Loads Correctly', async ({ page }) => {
+  const iveyPage = new IveyProfilePage(page);
 
-  await test.step('Navigate to URL', async ({}) => {
-    await page.goto('https://pinaspeaks.com/mountaineer/@Ivey');
-    await expect(page.getByRole('img', { name: 'Ivey' })).toBeVisible();
-    await page.getByRole('img', { name: 'Ivey' }).click();
-  });
+  await iveyPage.goto();
+  await iveyPage.verifyPageLoaded();
+  await iveyPage.clickIveyImage(); // Optional interaction
 });
