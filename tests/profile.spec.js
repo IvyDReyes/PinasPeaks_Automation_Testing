@@ -87,20 +87,40 @@ test("Verify if Order by dropdown is working", async ({ page }) => {
     await expect(orderBy).toBeVisible();
     await expect(orderBy).toHaveText('Order by:');
     await expect(page.getByRole('combobox')).toBeVisible(); 
-
+    });
   });
 
-  await test.step('Check the Order by Elevation (masl)', async () => {
+  test("Verify the Order by dropdown by Elevation is working", async ({ page }) => {
+    await page.goto("https://pinaspeaks.com/mountaineer/@Ivey");
+
+    await test.step('Select the Order by Elevation (masl) in the dropdown', async () => {
     await page.getByRole('combobox').selectOption({ value: 'masl' });
-  });
+    const resultMasl = page.locator('div').filter({ hasText: 'Mt. Pulag2926 MASL Ifugao,' }).first();
+    await expect(resultMasl).toBeVisible();
+    await resultMasl.click();
+     });
+});
 
-  await test.step('Check the Order by Name', async () => {
+  test("Verify the Order by dropdown by Name is working", async ({ page }) => {
+    await page.goto("https://pinaspeaks.com/mountaineer/@Ivey");
+
+    await test.step('Select the Order by Name in the dropdown', async () => {
     await page.getByRole('combobox').selectOption({ value: 'name' });
-  });
+    const resultName = page.locator('div').filter({ hasText: 'Malvar\'s Peak419 MASL Rizal' }).first();
+    await expect(resultName).toBeVisible();
+    await resultName.click();
+     });
+});
 
-  await test.step('Check the Order by Date climbed', async () => {
+  test("Verify the Order by dropdown by Date Climbed is working", async ({ page }) => {
+    await page.goto("https://pinaspeaks.com/mountaineer/@Ivey");
+
+    await test.step('Select the Order by Date Climbed in the dropdown', async () => {
     await page.getByRole('combobox').selectOption({ value: 'date' });
-  });
+    const resultDate = page.locator('div').filter({ hasText: 'Mt. Kapayas783 MASL Cebu Day' }).first();
+    await expect(resultDate).toBeVisible();
+    await resultDate.click();
+     });
 });
 
 test('Verify the Search textbox', async ({ page }) => {
@@ -110,6 +130,13 @@ test('Verify the Search textbox', async ({ page }) => {
     const searchBox = page.getByRole('textbox', { name: 'Search...' });
     await expect(searchBox).toBeVisible();
     await searchBox.fill('Pulag');
+    
+  });
+
+   await test.step('Search with valid invalid input', async () => {
+    const searchBox = page.getByRole('textbox', { name: 'Search...' });
+    await expect(searchBox).toBeVisible();
+    await searchBox.fill('Apo');
     
   });
 });
