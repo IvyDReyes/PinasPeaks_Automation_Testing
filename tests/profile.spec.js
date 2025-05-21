@@ -6,6 +6,7 @@ test("Verify if the Profile page of Ivey is loading successfully", async ({
   await test.step("Navigate to URL", async () => {
     await page.goto("https://pinaspeaks.com/mountaineer/@Ivey");
     await expect(page.getByRole('link', { name: 'PinasPeaks Logo' })).toBeVisible();
+    await page.screenshot({ path: 'screenshots/profile-page_navigate-to-url_loaded-visible_pass.png' });
     await expect(page).toHaveTitle("PinasPeaks");
     await page.waitForLoadState("networkidle");
   });
@@ -97,6 +98,7 @@ test("Verify if Order by dropdown is working", async ({ page }) => {
     await page.getByRole('combobox').selectOption({ value: 'masl' });
     const resultMasl = page.locator('div').filter({ hasText: 'Mt. Pulag2926 MASL Ifugao,' }).first();
     await expect(resultMasl).toBeVisible();
+    await page.screenshot({ path: 'screenshots/profile-page_order-by_masl-visible_pass.png' });
     await resultMasl.click();
      });
 });
@@ -108,6 +110,7 @@ test("Verify if Order by dropdown is working", async ({ page }) => {
     await page.getByRole('combobox').selectOption({ value: 'name' });
     const resultName = page.locator('div').filter({ hasText: 'Malvar\'s Peak419 MASL Rizal' }).first();
     await expect(resultName).toBeVisible();
+    await page.screenshot({ path: 'screenshots/profile-page_order-by-name-visible_pass.png' });
     await resultName.click();
      });
 });
@@ -119,6 +122,7 @@ test("Verify if Order by dropdown is working", async ({ page }) => {
     await page.getByRole('combobox').selectOption({ value: 'date' });
     const resultDate = page.locator('div').filter({ hasText: 'Mt. Kapayas783 MASL Cebu Day' }).first();
     await expect(resultDate).toBeVisible();
+    await page.screenshot({ path: 'screenshots/profile-page_order-by-date_climbed-visible_pass.png' });
     await resultDate.click();
      });
 });
@@ -130,6 +134,7 @@ test('Verify the Search textbox', async ({ page }) => {
     const searchBox = page.getByRole('textbox', { name: 'Search...' });
     await expect(searchBox).toBeVisible();
     await searchBox.fill('Pulag');
+    await page.screenshot({ path: 'screenshots/profile-page_search-valid-input_visible_pass.png' });
     
   });
 
